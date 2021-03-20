@@ -1,0 +1,7 @@
+{
+  "name": "note-card",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
