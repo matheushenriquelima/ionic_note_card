@@ -1,3 +1,91 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-header>
+    <ion-toolbar [color]="this.modoDark ? 'dark' : 'light'">
+      <ion-title color="warning">
+        NoteCard
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="mudarModo()">
+          <ion-icon [name]="!this.modoDark ? 'moon-outline' : 'bulb-outline'"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [color]="this.modoDark ? 'dark' : 'light'">
+    <div>
+      <ion-row *ngIf="!habilitaForm">
+        <ion-col size="12" *ngFor="let note of notecardList">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title color="warning">
+                {{note.titulo}}
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{note.descricao}}
+            </ion-card-content>
+            <ion-card-subtitle color="danger">
+              <ion-buttons>
+                <ion-button>
+                  <ion-button (click)="editarNoteCard(note)">
+                    <ion-icon name="pencil-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button (click)="removerNoteCard(note)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-button>
+              </ion-buttons>
+            </ion-card-subtitle>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div *ngIf="habilitaForm">
+      <ion-card>
+        <ion-item>
+          <ion-label position="floating">
+            Titulo
+          </ion-label>
+          <ion-input [(ngModel)]="notecard.titulo" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">
+            Descrição
+          </ion-label>
+          <ion-textarea rows="15" cols="20" [(ngModel)]="notecard.descricao"></ion-textarea>
+        </ion-item>
+      </ion-card>
+    </div>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar [color]="this.modoDark ? 'dark' : 'light'">
+      <div *ngIf="!habilitaForm">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <ion-button size="small" (click)="habilitarForm()">Novo NoteCard</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div *ngIf="habilitaForm">
+        <ion-toolbar [color]="this.modoDark ? 'dark' : 'light'">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button size="small" color="danger" (click)="cancelar()">Cancelar
+                </ion-button>
+              </ion-col>
+              <ion-col size="6" class="ion-text-end">
+                <ion-button size="small" color="success" (click)="salvarNovoNoteCard()">
+                  Salvar</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-toolbar>
+      </div>
+    </ion-toolbar>
+  </ion-footer>
 </ion-app>
