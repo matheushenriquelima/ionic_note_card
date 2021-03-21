@@ -13,7 +13,7 @@ export class AppComponent {
   notecardList: NoteCard[] = [];
   habilitaForm = false;
   modoDark = false;
-
+  ehEdicao = false;
 
   constructor(public toastController: ToastController) {
     this.initCardDefault();
@@ -22,10 +22,12 @@ export class AppComponent {
   initCardDefault() {
     this.notecardList = [
       {
+        id: 1,
         titulo: 'Note 1',
         descricao: 'Iniciando note card 1'
       },
       {
+        id: 2,
         titulo: 'Note 2',
         descricao: 'Iniciando note card 2'
       }
@@ -37,9 +39,15 @@ export class AppComponent {
   }
 
   salvarNovoNoteCard(): void {
-    this.notecardList.push(this.notecard);
+    if (this.ehEdicao) {
+      this.notecardList[this.notecard.id - 1] = this.notecard;
+      this.ehEdicao = false;
+    } else {
+      this.notecard.id = this.notecardList.length + 1;
+      this.notecardList.push(this.notecard);
+    }
     this.habilitaForm = false;
-    this.presentToast()
+    this.presentToast();
     this.notecard = new NoteCard();
   }
 
@@ -51,7 +59,7 @@ export class AppComponent {
   editarNoteCard(noteCard: NoteCard): void {
     this.habilitarForm();
     this.notecard = noteCard;
-    this.removerNoteCard(this.notecard);
+    this.ehEdicao = true;
   }
 
   removerNoteCard(noteCard: NoteCard): void {
