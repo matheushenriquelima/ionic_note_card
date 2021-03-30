@@ -1,0 +1,43 @@
+<ion-app>
+  <ion-content color="dark" >
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" *ngFor="let note of notecardList">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title color="warning">
+                {{note?.titulo}}
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{note?.descricao}}
+            </ion-card-content>
+            <ion-card-subtitle color="warning">
+              <ion-buttons >
+                <ion-button (click)="ativarRotaEditarNoteCard(note._id)">
+                  <ion-icon name="pencil-outline"></ion-icon>
+                </ion-button>
+                <ion-button (click)="confirmarRemocao(note._id)">
+                  <ion-icon name="trash-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-card-subtitle>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  <ion-footer >
+    <ion-toolbar color="warning" >
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-text-center">
+              <ion-button size="small" (click)="novoNoteCard()">Novo NoteCard</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>

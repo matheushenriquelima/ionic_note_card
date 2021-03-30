@@ -1,5 +1,5 @@
 export class NoteCard {
-  id: number;
+  _id: string;
   titulo: string;
   descricao: string;
 }

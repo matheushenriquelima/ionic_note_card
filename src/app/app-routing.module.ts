@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NoteCardModule } from './components/note-card.module';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '',
-    pathMatch: 'full'
-  },
+    loadChildren: () => NoteCardModule
+  }
 ];
 
 @NgModule({
